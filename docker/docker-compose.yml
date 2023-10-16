@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      - POSTGRES_USER=${FILE_CLOUD_DB_USERNAME}
+      - POSTGRES_PASSWORD=${FILE_CLOUD_DB_PASSWORD}
+      - POSTGRES_DB=${FILE_CLOUD_DB_NAME}
+    ports:
+      - '${FILE_CLOUD_DB_PORT}:5432'
