@@ -25,4 +25,5 @@ public class UserAccountController {
 
         this.registerUserAccountUseCase.register(registerRequest);
     }
+    
 }
