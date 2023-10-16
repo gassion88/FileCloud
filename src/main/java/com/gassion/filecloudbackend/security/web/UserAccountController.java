@@ -27,7 +27,7 @@ public class UserAccountController {
     @PostMapping("register")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerAccount(@Valid @RequestBody RegisterRequest registerRequest) {
-        UserAccount userAccount = registerRequestToUserAccountMapper.map(registerRequest)
+        UserAccount userAccount = registerRequestToUserAccountMapper.map(registerRequest);
         this.userAccountService.createUserAccount(userAccount);
     }
 }
