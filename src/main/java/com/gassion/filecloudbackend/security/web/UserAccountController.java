@@ -5,10 +5,10 @@ import com.gassion.filecloudbackend.security.model.UserRole;
 import com.gassion.filecloudbackend.security.service.UserAccountService;
 import com.gassion.filecloudbackend.security.service.UserRoleService;
 import com.gassion.filecloudbackend.security.web.model.RegisterRequest;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
@@ -33,10 +33,7 @@ public class UserAccountController {
 
     @PostMapping("register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@RequestBody RegisterRequest registerRequest) {
-        Assert.hasLength(registerRequest.username(), "Username should not be null or empty");
-        Assert.hasLength(registerRequest.password(), "Password should not be null or empty");
-
+    public void registerAccount(@Valid @RequestBody RegisterRequest registerRequest) {
         UserRole userRole = this.userRoleService.findUserRole().orElseThrow(() -> new RuntimeException("User role exception"));
 
         UserAccount userAccount = new UserAccount();
