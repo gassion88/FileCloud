@@ -1,7 +1,10 @@
 databaseChangeLog:
   - include:
-      file: 0.0.1/changelog-create-filedb-schema.sql
+      file: 0.0.1/changelog-create-file_cloud-schema.sql
       relativeToChangelogFile: true
   - include:
       file: 0.0.1/changelog-create-identity-schema.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 0.0.1/changelog-create-file_cloud-user_profile-table.sql
       relativeToChangelogFile: true
