@@ -3,7 +3,10 @@ package com.gassion.filecloudbackend.security.service.impl;
 import com.gassion.filecloudbackend.security.model.UserAccount;
 import com.gassion.filecloudbackend.security.repository.UserAccountRepository;
 import com.gassion.filecloudbackend.security.service.UserAccountService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
@@ -22,6 +25,11 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw new RuntimeException("Account with this username already exists");
         }
         this.userAccountRepository.save(userAccount);
+    }
+
+    @Override
+    public Optional<UserDetails> findUserByUsername(String username) {
+        return this.userAccountRepository.findByUsername(username);
     }
 
 }

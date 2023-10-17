@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(schema = "identity", name = "user_accounts")
-public class UserAccount implements UserDetails {
+public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class UserAccount implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             schema = "identity",
             name = "user_accounts_roles",
@@ -38,28 +38,4 @@ public class UserAccount implements UserDetails {
     )
     private Set<UserRole> authorities = new HashSet<>();
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

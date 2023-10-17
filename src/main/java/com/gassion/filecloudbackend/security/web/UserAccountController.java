@@ -22,8 +22,8 @@ public class UserAccountController {
     @ResponseStatus(HttpStatus.CREATED)
     public void registerAccount(@Valid @RequestBody RegisterRequest registerRequest) {
         log.info("Register request {}", registerRequest);
-
+ 
         this.registerUserAccountUseCase.register(registerRequest);
     }
-    
+
 }
