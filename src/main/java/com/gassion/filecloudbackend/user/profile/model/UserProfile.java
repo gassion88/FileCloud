@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "filecloud", name = "user_profiles")
+@Table(schema = "file_cloud", name = "user_profiles")
 public class UserProfile {
 
     @Id
