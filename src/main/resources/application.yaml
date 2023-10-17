@@ -4,3 +4,8 @@ spring:
     username: ${FILE_CLOUD_DB_USERNAME}
     password: ${FILE_CLOUD_DB_PASSWORD}
     driverClassName: org.postgresql.Driver
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
