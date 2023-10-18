@@ -1,4 +1,4 @@
-package com.gassion.filecloudbackend.exception;
+package com.gassion.filecloudbackend.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

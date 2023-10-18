@@ -1,4 +1,4 @@
-package com.gassion.filecloudbackend.security.mapper;
+package com.gassion.filecloudbackend.common.mapper;
 
 public interface Mapper <D, S> {
 
