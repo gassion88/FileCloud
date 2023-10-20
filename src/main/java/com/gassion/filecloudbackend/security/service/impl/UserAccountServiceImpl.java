@@ -3,7 +3,6 @@ package com.gassion.filecloudbackend.security.service.impl;
 import com.gassion.filecloudbackend.security.model.UserAccount;
 import com.gassion.filecloudbackend.security.repository.UserAccountRepository;
 import com.gassion.filecloudbackend.security.service.UserAccountService;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
