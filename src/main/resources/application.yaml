@@ -4,8 +4,15 @@ spring:
     username: ${FILE_CLOUD_DB_USERNAME}
     password: ${FILE_CLOUD_DB_PASSWORD}
     driverClassName: org.postgresql.Driver
+  servlet:
+    multipart:
+      enabled: true
 logging:
   level:
     org:
       springframework:
         security: debug
+minio:
+  user_id: minio
+  secret_key: miniosecret
+  endpoint: http://127.0.0.1:9000
