@@ -55,4 +55,16 @@ public class FolderDAOImpl implements FolderDAO {
         }
     }
 
+    @Override
+    public void deleteFolder(String bucket, String path) {
+        try {
+        minioClient.removeObject(
+                RemoveObjectArgs.builder().bucket(bucket).object(path).build());
+        } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                XmlParserException e) {
+        throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import com.gassion.filecloudbackend.security.api.service.IdentityApiService;
 import com.gassion.filecloudbackend.storage.mapper.BucketItemToUserBucketResponseMapper;
 import com.gassion.filecloudbackend.storage.service.FolderService;
 import com.gassion.filecloudbackend.storage.web.dto.CreateFolderRequest;
+import com.gassion.filecloudbackend.storage.web.dto.DeleteFolderRequest;
 import com.gassion.filecloudbackend.storage.web.dto.UserBucketResponse;
 import io.minio.errors.*;
 import io.minio.messages.Item;
@@ -46,6 +47,16 @@ public class FileController {
     public UserBucketResponse createNewFolder(@Valid @RequestBody CreateFolderRequest createFolderRequest)  {
         String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
         folderService.createFolder(userBucketName, createFolderRequest.path());
+
+        List<Item> userItems = folderService.getUserBucketItems(userBucketName);
+        return bucketItemMapper.map(userItems);
+    }
+
+    @DeleteMapping ("/folder")
+    @ResponseStatus(HttpStatus.OK)
+    public UserBucketResponse deleteFolder(@Valid @RequestBody DeleteFolderRequest deleteFolderRequest)  {
+        String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
+        folderService.deleteFolder(userBucketName, deleteFolderRequest.path());
 
         List<Item> userItems = folderService.getUserBucketItems(userBucketName);
         return bucketItemMapper.map(userItems);

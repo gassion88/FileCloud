@@ -52,8 +52,8 @@ public class FolderServiceImpl implements FolderService {
     }
 
     @Override
-    public void deleteFolder() {
-
+    public void deleteFolder(String bucket, String path) {
+        folderDAO.deleteFolder(bucket, path);
     }
 
     @Override

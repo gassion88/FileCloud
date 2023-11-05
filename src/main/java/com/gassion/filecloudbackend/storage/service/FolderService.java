@@ -16,7 +16,7 @@ public interface FolderService {
 
     void createFolder(String bucket, String path);
 
-    void deleteFolder();
+    void deleteFolder(String bucket, String path);
 
     void renameFolder();
 

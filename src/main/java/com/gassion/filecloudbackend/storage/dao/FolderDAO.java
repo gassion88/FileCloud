@@ -16,4 +16,6 @@ public interface FolderDAO {
 
     void createFolder(String bucket, String path);
 
+    void deleteFolder(String bucket, String path);
+
 }
