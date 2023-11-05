@@ -14,6 +14,8 @@ public interface FolderService {
 
     List<Item> getUserBucketItems() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
 
+    void createUserBucket(String userId) ;
+
     void createFolder();
 
     void deleteFolder();
