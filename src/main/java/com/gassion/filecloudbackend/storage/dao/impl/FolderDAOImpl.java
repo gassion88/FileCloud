@@ -29,10 +29,17 @@ public class FolderDAOImpl implements FolderDAO {
     }
 
     @Override
-    public void createBucket(String bucketName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        minioClient.makeBucket(
-                MakeBucketArgs.builder()
-                        .bucket(bucketName)
-                        .build());
+    public void createBucket(String bucketName) {
+        try {
+            minioClient.makeBucket(
+                    MakeBucketArgs.builder()
+                            .bucket(bucketName)
+                            .build());
+
+        } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                 InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                 XmlParserException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -43,13 +43,7 @@ public class FolderServiceImpl implements FolderService {
 
     @Override
     public void createUserBucket(String userId)  {
-        try {
             folderDAO.createBucket("user" + userId);
-        } catch (ServerException | InsufficientDataException | ErrorResponseException | IOException |
-                 NoSuchAlgorithmException | InvalidKeyException | InvalidResponseException | XmlParserException |
-                 InternalException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override

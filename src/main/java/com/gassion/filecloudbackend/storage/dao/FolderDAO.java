@@ -12,5 +12,5 @@ public interface FolderDAO {
 
     Iterable<Result<Item>> getUserBucket(String bucket);
 
-    void createBucket(String bucketName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    void createBucket(String bucketName);
 }
