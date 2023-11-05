@@ -14,7 +14,7 @@ public interface FolderService {
 
     void createUserBucket(String userId) ;
 
-    void createFolder();
+    void createFolder(String bucket, String path);
 
     void deleteFolder();
 

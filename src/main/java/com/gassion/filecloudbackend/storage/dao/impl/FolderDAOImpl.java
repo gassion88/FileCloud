@@ -1,14 +1,12 @@
 package com.gassion.filecloudbackend.storage.dao.impl;
 
 import com.gassion.filecloudbackend.storage.dao.FolderDAO;
-import io.minio.ListObjectsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.Result;
+import io.minio.*;
 import io.minio.errors.*;
 import io.minio.messages.Item;
 import org.springframework.stereotype.Repository;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -42,4 +40,19 @@ public class FolderDAOImpl implements FolderDAO {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void createFolder(String bucket, String path) {
+        try {
+            minioClient.putObject(
+                    PutObjectArgs.builder().bucket(bucket).object(path).stream(
+                                    new ByteArrayInputStream(new byte[] {}), 0, -1)
+                            .build());
+        } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                 InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                 XmlParserException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

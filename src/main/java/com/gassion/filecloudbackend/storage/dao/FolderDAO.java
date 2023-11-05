@@ -13,4 +13,7 @@ public interface FolderDAO {
     Iterable<Result<Item>> getUserBucket(String bucket);
 
     void createBucket(String bucketName);
+
+    void createFolder(String bucket, String path);
+
 }

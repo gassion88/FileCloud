@@ -47,8 +47,8 @@ public class FolderServiceImpl implements FolderService {
     }
 
     @Override
-    public void createFolder() {
-
+    public void createFolder(String bucket, String path) {
+            folderDAO.createFolder(bucket, path);
     }
 
     @Override
