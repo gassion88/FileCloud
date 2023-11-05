@@ -2,6 +2,7 @@ package com.gassion.filecloudbackend.storage.web;
 
 import com.gassion.filecloudbackend.storage.mapper.BucketItemToUserBucketResponseMapper;
 import com.gassion.filecloudbackend.storage.service.FolderService;
+import com.gassion.filecloudbackend.storage.web.dto.UserBucketResponse;
 import io.minio.errors.*;
 import io.minio.messages.Item;
 import org.springframework.http.HttpStatus;

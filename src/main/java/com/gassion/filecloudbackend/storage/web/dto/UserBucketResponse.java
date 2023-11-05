@@ -1,4 +1,4 @@
-package com.gassion.filecloudbackend.storage.web;
+package com.gassion.filecloudbackend.storage.web.dto;
 
 import com.gassion.filecloudbackend.storage.model.BucketFile;
 

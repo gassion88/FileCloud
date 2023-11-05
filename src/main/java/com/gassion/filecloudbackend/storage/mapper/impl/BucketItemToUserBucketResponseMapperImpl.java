@@ -2,7 +2,7 @@ package com.gassion.filecloudbackend.storage.mapper.impl;
 
 import com.gassion.filecloudbackend.storage.mapper.BucketItemToUserBucketResponseMapper;
 import com.gassion.filecloudbackend.storage.model.BucketFile;
-import com.gassion.filecloudbackend.storage.web.UserBucketResponse;
+import com.gassion.filecloudbackend.storage.web.dto.UserBucketResponse;
 import io.minio.messages.Item;
 import org.springframework.stereotype.Component;
 

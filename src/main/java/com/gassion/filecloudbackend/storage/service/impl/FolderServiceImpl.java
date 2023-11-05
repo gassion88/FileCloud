@@ -2,7 +2,6 @@ package com.gassion.filecloudbackend.storage.service.impl;
 
 import com.gassion.filecloudbackend.storage.dao.FolderDAO;
 import com.gassion.filecloudbackend.storage.service.FolderService;
-import com.gassion.filecloudbackend.storage.web.UserBucketResponse;
 import io.minio.Result;
 import io.minio.errors.*;
 import io.minio.messages.Item;
