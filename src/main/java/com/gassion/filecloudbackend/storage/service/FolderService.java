@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface FolderService {
 
-    List<Item> getUserBucketItems() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    List<Item> getUserBucketItems(String userBucketName) ;
 
     void createUserBucket(String userId) ;
 

@@ -23,12 +23,19 @@ public class FolderServiceImpl implements FolderService {
     }
 
     @Override
-    public List<Item> getUserBucketItems() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public List<Item> getUserBucketItems(String userId) {
         Iterable<Result<Item>> results =  folderDAO.getUserBucket(userId);
         List<Item> items = new ArrayList<>();
 
-        for (Result<Item> result : results) {
-            items.add(result.get()) ;
+        try {
+            for (Result<Item> result : results) {
+
+                items.add(result.get());
+            }
+        } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                 InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                 XmlParserException e) {
+            throw new RuntimeException(e);
         }
 
         return items;

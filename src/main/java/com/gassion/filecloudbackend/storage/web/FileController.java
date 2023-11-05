@@ -1,5 +1,6 @@
 package com.gassion.filecloudbackend.storage.web;
 
+import com.gassion.filecloudbackend.security.api.service.IdentityApiService;
 import com.gassion.filecloudbackend.storage.mapper.BucketItemToUserBucketResponseMapper;
 import com.gassion.filecloudbackend.storage.service.FolderService;
 import com.gassion.filecloudbackend.storage.web.dto.UserBucketResponse;
@@ -19,17 +20,21 @@ public class FileController {
 
     private final FolderService folderService;
 
+    private final IdentityApiService identityApiService;
+
     private final BucketItemToUserBucketResponseMapper bucketItemMapper;
 
-    public FileController(FolderService folderService, BucketItemToUserBucketResponseMapper bucketItemMapper) {
+    public FileController(FolderService folderService, IdentityApiService identityApiService, BucketItemToUserBucketResponseMapper bucketItemMapper) {
         this.folderService = folderService;
+        this.identityApiService = identityApiService;
         this.bucketItemMapper = bucketItemMapper;
     }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public UserBucketResponse getUserBucket() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        List<Item> userItems = folderService.getUserBucketItems();
+    public UserBucketResponse getUserBucket()  {
+        String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
+        List<Item> userItems = folderService.getUserBucketItems(userBucketName);
         return bucketItemMapper.map(userItems);
     }
 
