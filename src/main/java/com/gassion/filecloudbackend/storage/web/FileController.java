@@ -6,15 +6,11 @@ import com.gassion.filecloudbackend.storage.service.FolderService;
 import com.gassion.filecloudbackend.storage.web.dto.CreateFolderRequest;
 import com.gassion.filecloudbackend.storage.web.dto.DeleteFolderRequest;
 import com.gassion.filecloudbackend.storage.web.dto.UserBucketResponse;
-import io.minio.errors.*;
 import io.minio.messages.Item;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
