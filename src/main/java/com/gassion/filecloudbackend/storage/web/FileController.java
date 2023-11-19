@@ -3,6 +3,7 @@ package com.gassion.filecloudbackend.storage.web;
 import com.gassion.filecloudbackend.security.api.service.IdentityApiService;
 import com.gassion.filecloudbackend.storage.mapper.BucketItemToUserBucketResponseMapper;
 import com.gassion.filecloudbackend.storage.service.FolderService;
+import com.gassion.filecloudbackend.storage.web.dto.CopyFolderRequest;
 import com.gassion.filecloudbackend.storage.web.dto.CreateFolderRequest;
 import com.gassion.filecloudbackend.storage.web.dto.DeleteFolderRequest;
 import com.gassion.filecloudbackend.storage.web.dto.UserBucketResponse;
@@ -53,6 +54,16 @@ public class FileController {
     public UserBucketResponse deleteFolder(@Valid @RequestBody DeleteFolderRequest deleteFolderRequest)  {
         String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
         folderService.deleteFolder(userBucketName, deleteFolderRequest.path());
+
+        List<Item> userItems = folderService.getUserBucketItems(userBucketName);
+        return bucketItemMapper.map(userItems);
+    }
+
+    @PutMapping("/folder_copy")
+    @ResponseStatus(HttpStatus.OK)
+    public UserBucketResponse copyFolder(@Valid @RequestBody CopyFolderRequest copyFolderRequest)  {
+        String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
+        folderService.copyFolder(userBucketName, copyFolderRequest.source(), copyFolderRequest.target());
 
         List<Item> userItems = folderService.getUserBucketItems(userBucketName);
         return bucketItemMapper.map(userItems);
