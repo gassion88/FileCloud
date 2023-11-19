@@ -18,4 +18,5 @@ public interface FolderDAO {
 
     void deleteFolder(String bucket, String path);
 
+    void copyFolder(String bucket, String sourceFolder, String targetFolder);
 }

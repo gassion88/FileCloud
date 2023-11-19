@@ -67,4 +67,24 @@ public class FolderDAOImpl implements FolderDAO {
         }
     }
 
+    @Override
+    public void copyFolder(String bucket, String sourceFolder, String targetFolder) {
+        try {
+            minioClient.copyObject(
+                    CopyObjectArgs.builder()
+                            .bucket(bucket)
+                            .object(targetFolder)
+                            .source(
+                                    CopySource.builder()
+                                            .bucket(bucket)
+                                            .object(sourceFolder)
+                                            .build())
+                            .build());
+        } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                 InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                 XmlParserException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
