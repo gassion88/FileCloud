@@ -66,4 +66,9 @@ public class FolderServiceImpl implements FolderService {
 
     }
 
+    @Override
+    public void copyFolder(String bucket, String sourceFolder, String targetFolder) {
+        folderDAO.copyFolder(bucket, sourceFolder, targetFolder);
+    }
+
 }
