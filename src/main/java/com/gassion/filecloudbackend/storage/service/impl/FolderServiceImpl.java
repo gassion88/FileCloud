@@ -58,8 +58,9 @@ public class FolderServiceImpl implements FolderService {
     }
 
     @Override
-    public void renameFolder() {
-
+    public void renameFolder(String bucket, String source, String newName) {
+        folderDAO.copyFolder(bucket, source, newName);
+        folderDAO.deleteFolder(bucket, source);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class FileController {
         List<Item> userItems = folderService.getUserBucketItems(userBucketName);
         return bucketItemMapper.map(userItems);
     }
-    
+
     @PutMapping("/folder")
     @ResponseStatus(HttpStatus.OK)
     public UserBucketResponse createNewFolder(@Valid @RequestBody CreateFolderRequest createFolderRequest)  {
@@ -70,6 +70,16 @@ public class FileController {
     public UserBucketResponse moveFolder(@Valid @RequestBody MoveFolderRequest moveFolderRequest)  {
         String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
         folderService.moveFolder(userBucketName, moveFolderRequest.source(), moveFolderRequest.target());
+
+        List<Item> userItems = folderService.getUserBucketItems(userBucketName);
+        return bucketItemMapper.map(userItems);
+    }
+
+    @PutMapping("/folder_rename")
+    @ResponseStatus(HttpStatus.OK)
+    public UserBucketResponse renameFolder(@Valid @RequestBody RenameFolderRequest moveFolderRequest)  {
+        String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
+        folderService.renameFolder(userBucketName, moveFolderRequest.source(), moveFolderRequest.newName());
 
         List<Item> userItems = folderService.getUserBucketItems(userBucketName);
         return bucketItemMapper.map(userItems);

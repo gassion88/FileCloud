@@ -15,9 +15,9 @@ public interface FolderService {
 
     void deleteFolder(String bucket, String path);
 
-    void renameFolder();
+    void renameFolder(String bucket, @NotBlank String source, @NotBlank String s);
 
-    void moveFolder(String userBucketName, @NotBlank String source, @NotBlank String target);
+    void moveFolder(String bucket, @NotBlank String source, @NotBlank String target);
 
-    void copyFolder(String sourceFolder, String targetFolder, String folder);
+    void copyFolder(String bucket, String targetFolder, String folder);
 }
