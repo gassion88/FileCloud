@@ -3,10 +3,7 @@ package com.gassion.filecloudbackend.storage.web;
 import com.gassion.filecloudbackend.security.api.service.IdentityApiService;
 import com.gassion.filecloudbackend.storage.mapper.BucketItemToUserBucketResponseMapper;
 import com.gassion.filecloudbackend.storage.service.FolderService;
-import com.gassion.filecloudbackend.storage.web.dto.CopyFolderRequest;
-import com.gassion.filecloudbackend.storage.web.dto.CreateFolderRequest;
-import com.gassion.filecloudbackend.storage.web.dto.DeleteFolderRequest;
-import com.gassion.filecloudbackend.storage.web.dto.UserBucketResponse;
+import com.gassion.filecloudbackend.storage.web.dto.*;
 import io.minio.messages.Item;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -37,8 +34,7 @@ public class FileController {
         List<Item> userItems = folderService.getUserBucketItems(userBucketName);
         return bucketItemMapper.map(userItems);
     }
-
-
+    
     @PutMapping("/folder")
     @ResponseStatus(HttpStatus.OK)
     public UserBucketResponse createNewFolder(@Valid @RequestBody CreateFolderRequest createFolderRequest)  {
@@ -64,6 +60,16 @@ public class FileController {
     public UserBucketResponse copyFolder(@Valid @RequestBody CopyFolderRequest copyFolderRequest)  {
         String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
         folderService.copyFolder(userBucketName, copyFolderRequest.source(), copyFolderRequest.target());
+
+        List<Item> userItems = folderService.getUserBucketItems(userBucketName);
+        return bucketItemMapper.map(userItems);
+    }
+
+    @PutMapping("/folder_move")
+    @ResponseStatus(HttpStatus.OK)
+    public UserBucketResponse moveFolder(@Valid @RequestBody MoveFolderRequest moveFolderRequest)  {
+        String userBucketName = "user" + identityApiService.getCurrentUserAccount().get().currentUserAccountId();
+        folderService.moveFolder(userBucketName, moveFolderRequest.source(), moveFolderRequest.target());
 
         List<Item> userItems = folderService.getUserBucketItems(userBucketName);
         return bucketItemMapper.map(userItems);

@@ -1,6 +1,7 @@
 package com.gassion.filecloudbackend.storage.service;
 
 import io.minio.messages.Item;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface FolderService {
 
     void renameFolder();
 
-    void moveFolder();
+    void moveFolder(String userBucketName, @NotBlank String source, @NotBlank String target);
 
     void copyFolder(String sourceFolder, String targetFolder, String folder);
 }

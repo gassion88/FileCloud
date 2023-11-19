@@ -5,6 +5,7 @@ import com.gassion.filecloudbackend.storage.service.FolderService;
 import io.minio.Result;
 import io.minio.errors.*;
 import io.minio.messages.Item;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -62,13 +63,13 @@ public class FolderServiceImpl implements FolderService {
     }
 
     @Override
-    public void moveFolder() {
-
+    public void moveFolder(String bucket, @NotBlank String source, @NotBlank String target) {
+        folderDAO.copyFolder(bucket, source, target);
+        folderDAO.deleteFolder(bucket, source);
     }
 
     @Override
     public void copyFolder(String bucket, String sourceFolder, String targetFolder) {
         folderDAO.copyFolder(bucket, sourceFolder, targetFolder);
     }
-
 }
