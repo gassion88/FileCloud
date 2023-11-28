@@ -10,6 +10,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class FolderDAOImpl implements FolderDAO {
@@ -21,9 +23,23 @@ public class FolderDAOImpl implements FolderDAO {
     }
 
     @Override
-    public Iterable<Result<Item>> getUserBucket(String bucket) {
-        return  minioClient.listObjects(
+    public List<Item> getUserBucket(String bucket) {
+        Iterable<Result<Item>> results =  minioClient.listObjects(
                 ListObjectsArgs.builder().bucket(bucket).recursive(true).build());
+
+        List<Item> items = new ArrayList<>();
+
+        for (Result<Item> result : results) {
+            try {
+                items.add(result.get());
+            } catch (ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException |
+                     InvalidResponseException | IOException | NoSuchAlgorithmException | ServerException |
+                     XmlParserException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return items;
     }
 
     @Override
